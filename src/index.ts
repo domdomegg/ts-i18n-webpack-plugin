@@ -1,18 +1,12 @@
 // eslint-disable-next-line import/no-extraneous-dependencies
 import { Compiler } from 'webpack';
 import path from 'path';
-import { generateFs } from 'ts-i18n';
-
-type TsI18nWebpackPluginOptions = {
-  inputDirectory: string,
-  outputDirectory: string,
-  defaultLanguage: string,
-}
+import { generateFs, GenerateFsOptions } from 'ts-i18n';
 
 class TsI18nWebpackPlugin {
-  private options: TsI18nWebpackPluginOptions;
+  private options: GenerateFsOptions;
 
-  constructor(options: TsI18nWebpackPluginOptions) {
+  constructor(options: GenerateFsOptions) {
     this.options = options;
   }
 
