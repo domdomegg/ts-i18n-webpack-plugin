@@ -1,7 +1,7 @@
 {
-  "name": "typescript-library-template",
+  "name": "ts-i18n-webpack-plugin",
   "version": "0.0.0",
-  "description": "Template for creating TypeScript libraries",
+  "description": "Webpack plugin for running ts-i18n",
   "license": "MIT",
   "author": "Adam Jones (domdomegg)",
   "main": "dist/index.js",
@@ -19,6 +19,9 @@
     "build": "tsc",
     "prepublishOnly": "npm run clean && npm run build"
   },
+  "dependencies": {
+    "ts-i18n": "^0.0.1"
+  },
   "devDependencies": {
     "@types/jest": "^27.0.1",
     "@typescript-eslint/eslint-plugin": "^4.29.1",
@@ -29,7 +32,8 @@
     "eslint-plugin-import": "^2.24.0",
     "jest": "^27.0.6",
     "ts-jest": "^27.0.4",
-    "typescript": "^4.3.5"
+    "typescript": "^4.3.5",
+    "webpack": "^5.50.0"
   },
   "jest": {
     "preset": "ts-jest",

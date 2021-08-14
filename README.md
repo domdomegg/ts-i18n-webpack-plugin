@@ -1,11 +1,29 @@
-# typescript-library-template
+# ts-i18n-webpack-plugin
 
-Personal template for creating TypeScript libraries.
+Webpack plugin for running [ts-i18n](https://github.com/domdomegg/ts-i18n)
 
 ## Usage
 
-1. Use a copy of this template
-2. Add the `NPM_TOKEN` secret (For publishing)
-3. Update the package name and description in `package.json`
-4. Update this README
-5. Run `npm i` and start developing!
+Install the npm package:
+
+```
+npm i --save-dev ts-i18n-webpack-plugin
+```
+
+Add the plugin to your `webpack.config.js`
+
+```js
+module.exports = {
+  plugins: [
+    new TsI18nWebpackPlugin({
+      inputDirectory: 'i18n/src',
+      outputDirectory: 'i18n/generated',
+      defaultLanguage: 'en'
+    })
+    ...
+  ]
+  ...
+}
+```
+
+See the [ts-i18n](https://github.com/domdomegg/ts-i18n) docs for more details about configuration and setup.

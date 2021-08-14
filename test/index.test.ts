@@ -1,16 +1,38 @@
-import { sum } from '../src/index';
+import { Compiler } from 'webpack';
+import path from 'path';
+import { generateFs } from 'ts-i18n';
+import TsI18nWebpackPlugin from '../src/index';
 
-test('adds postiive numbers', () => {
-  expect(sum(1, 3)).toBe(4);
-  expect(sum(10001, 1345)).toBe(11346);
-});
+jest.mock('ts-i18n');
 
-test('adds negative numbers', () => {
-  expect(sum(-1, -3)).toBe(-4);
-  expect(sum(-10001, -1345)).toBe(-11346);
-});
+test('calls generateFs with options', () => {
+  const options = {
+    inputDirectory: 'input/dir',
+    outputDirectory: 'output/dir',
+    defaultLanguage: 'default_lang',
+  };
+  const plugin = new TsI18nWebpackPlugin(options);
 
-test('adds a negative and positive number', () => {
-  expect(sum(1, -3)).toBe(-2);
-  expect(sum(-10001, 1345)).toBe(-8656);
+  const mockCompiler = { hooks: {
+    compile: { tap: jest.fn() },
+    afterCompile: { tap: jest.fn() },
+  } };
+
+  // Calls generateFs under the hood
+  plugin.apply(mockCompiler as unknown as Compiler);
+  expect(mockCompiler.hooks.compile.tap).toBeCalledTimes(1);
+  expect(typeof mockCompiler.hooks.compile.tap.mock.calls[0][1]).toBe('function');
+  expect(generateFs).not.toBeCalled();
+  mockCompiler.hooks.compile.tap.mock.calls[0][1]();
+  expect(generateFs).toBeCalledTimes(1);
+  expect(generateFs).toBeCalledWith(options);
+
+  // Adds output directory as a context dependency
+  expect(mockCompiler.hooks.afterCompile.tap).toBeCalledTimes(1);
+  expect(typeof mockCompiler.hooks.afterCompile.tap.mock.calls[0][1]).toBe('function');
+  const contextDependencies = new Set(['existing/path']);
+  mockCompiler.hooks.afterCompile.tap.mock.calls[0][1]({ contextDependencies });
+  expect(contextDependencies.size).toBe(2);
+  expect(contextDependencies).toContain('existing/path');
+  expect(contextDependencies).toContain(path.resolve(options.inputDirectory));
 });
