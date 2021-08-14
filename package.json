@@ -1,6 +1,6 @@
 {
   "name": "ts-i18n-webpack-plugin",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "description": "Webpack plugin for running ts-i18n",
   "license": "MIT",
   "author": "Adam Jones (domdomegg)",
