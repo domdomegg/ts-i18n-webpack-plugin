@@ -20,7 +20,7 @@
     "prepublishOnly": "npm run clean && npm run build"
   },
   "dependencies": {
-    "ts-i18n": "^0.0.1"
+    "ts-i18n": "^0.0.2"
   },
   "devDependencies": {
     "@types/jest": "^27.0.1",
