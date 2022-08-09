@@ -4,6 +4,10 @@
   "description": "Webpack plugin for running ts-i18n",
   "license": "MIT",
   "author": "Adam Jones (domdomegg)",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/domdomegg/ts-i18n-webpack-plugin.git"
+  },
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "files": [
